@@ -1,0 +1,76 @@
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="description-box">
+                Your healthcare companion for managing medical information and family accounts. This app provides secure access to your and your family's medical files provided by your clinic, appointment reminders and balance statements - all in one convenient place.
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="login-container">
+                <div class="logo-icon"><img src="soft-clinic.png" alt="SoftClinic logo"></div>
+                <h1 class="app-title">SoftClinic</h1>
+                <p class="app-subtitle">Software CS</p>
+
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+
+                    <div class="error-message" *ngIf="errorMessage">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            name="username"
+                            [(ngModel)]="username"
+                            placeholder="Username" 
+                            required
+                            minlength="3"
+                            [disabled]="isLoading"
+                            #usernameField="ngModel"
+                        />
+                        <span class="field-error" *ngIf="usernameField.touched && usernameField.invalid">
+                            <span *ngIf="usernameField.errors?.['required']">Username is required.</span>
+                            <span *ngIf="usernameField.errors?.['minlength']">Username must be at least 3 characters.</span>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            name="password"
+                            [(ngModel)]="password"
+                            placeholder="Password" 
+                            required
+                            minlength="6"
+                            [disabled]="isLoading"
+                            #passwordField="ngModel"
+                        />
+                        <span class="field-error" *ngIf="passwordField.touched && passwordField.invalid">
+                            <span *ngIf="passwordField.errors?.['required']">Password is required.</span>
+                            <span *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters.</span>
+                        </span>
+                    </div>
+
+                
+                    <button 
+                        type="submit" 
+                        class="login-btn"
+                        [disabled]="loginForm.invalid || isLoading"
+                    >
+                        {{ isLoading ? 'Logging in...' : 'Login' }}
+                    </button>
+
+                    <div class="loading-spinner" *ngIf="isLoading">
+                        Please wait...
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="footer">
+                © 2026 SoftClinic V2. Powered By <span class="footer-brand"><img src="logo-soft.png" alt="SoftClinic logo"></span>. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>

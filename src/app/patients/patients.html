@@ -1,0 +1,73 @@
+    <main class="main-content">
+        <header class="top-headbar">
+            <div class="header-titles">
+                <h1>Patients</h1>
+                <p>Open, Monitor and Close patients files</p>
+            </div>
+
+            <div class="header-actions">
+                <div class="search-box">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input 
+                        type="text" 
+                        placeholder="Search..." 
+                        [(ngModel)]="searchTerm" 
+                        (input)="filterPatients()"
+                    >
+                </div>
+
+                <button type="button" class="qr-btn" title="Scan QR Code">
+                </button>
+
+                <button type="button" class="primary-btn" (click)="addPatient()">
+                    <span class="plus-sign">+</span> Add Patient
+                </button>
+            </div>
+        </header>
+
+        <div class="patients-container">
+            <div class="table-card">
+                <div *ngIf="isLoading" style="padding: 24px; text-align: center;">
+                    Loading patients from server...
+                </div>
+
+                <div *ngIf="errorMessage" style="padding: 24px; color: red; text-align: center;">
+                    {{ errorMessage }}
+                </div>
+
+                <table class="patients-table" *ngIf="!isLoading && !errorMessage">
+                    <thead>
+                        <tr>
+                            <th>File Number</th>
+                            <th>First Name</th>
+                            <th>Father Name</th>
+                            <th>Last Name</th>
+                            <th>Phone 1</th>
+                            <th>Phone 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            *ngFor="let patient of filteredPatients" 
+                            (click)="goToPatientDetails(patient.patientId)" 
+                        >
+                            <td>{{ patient.fileNumber || ('FILE#' + patient.patientId) }}</td>
+                            <td>{{ patient.firstName }}</td>
+                            <td>{{ patient.fatherName }}</td>
+                            <td>{{ patient.lastName }}</td>
+                            <td>{{ patient.phone1 || 'N/A' }}</td>
+                            <td>{{ patient.phone2 || 'N/A' }}</td>
+                        </tr>
+                        <tr *ngIf="filteredPatients.length === 0">
+                            <td colspan="6" style="text-align: center; padding: 24px; color: #94a3b8;">
+                                No patients found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>

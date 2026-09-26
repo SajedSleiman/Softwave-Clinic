@@ -1,0 +1,145 @@
+    <main class="main-content">
+        <header class="top-headbar">
+            <div class="header-title">
+                <h1>Add Patient</h1>
+                <p>Create a new patient file</p>
+            </div>
+            <div class="header-buttons">
+                <button type="button" class="discard-btn" (click)="discard()" [disabled]="loading">Discard</button>
+                <button type="button" class="save-btn" (click)="savePatient()" [disabled]="loading">
+                    {{ loading ? 'Saving...' : 'Save' }}
+                </button>
+            </div>
+        </header>
+
+        <div class="add-patient-container">
+            <div *ngIf="error" class="error-banner">
+                {{ error }}
+            </div>
+
+            <form [formGroup]="patientForm" class="patient-form" (ngSubmit)="savePatient()">
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>File Number *</label>
+                            <input type="text" formControlName="fileNumber" placeholder="e.g. PT-1001" class="clear-input">
+                        </div>
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" formControlName="firstName" placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label>Father Name *</label>
+                            <input type="text" formControlName="fatherName" placeholder="Enter father name">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" formControlName="lastName" placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <label>Date Of Birth</label>
+                            <input type="date" formControlName="dateOfBirth">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select formControlName="genderCode">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nationality</label>
+                            <select formControlName="nationalityCode">
+                                <option value="">Select Nationality</option>
+                                <option value="LB">Lebanese (LB)</option>
+                                <option value="SY">Syrian (SY)</option>
+                                <option value="PS">Palestinian (PS)</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>ID Number</label>
+                            <input type="text" formControlName="identityNumber" placeholder="Enter ID or Passport number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Contact Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Phone 1 *</label>
+                            <input type="tel" formControlName="phone1" placeholder="e.g. +9616445567">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone 2</label>
+                            <input type="tel" formControlName="phone2" placeholder="e.g. +9617145567">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" formControlName="email" placeholder="e.g. name@example.com">
+                        </div>
+                        
+                        <div class="form-group address-field">
+                            <label>Address Details</label>
+                            <input type="text" formControlName="addressLine" placeholder="Enter full address">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" formControlName="city" placeholder="Enter city">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select formControlName="countryCode">
+                                <option value="">Select Country</option>
+                                <option value="LB">Lebanon (LB)</option>
+                                <option value="SY">Syria (SY)</option>
+                                <option value="PS">Palestine (PS)</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Account & Financial</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Balance in USD</label>
+                            <div class="input-with-prefix balance-style">
+                                <span class="prefix">$</span>
+                                <input type="number" formControlName="balanceUSD" placeholder="0.00" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Balance in LBP</label>
+                            <div class="input-with-prefix balance-style">
+                                <span class="prefix">L.L</span>
+                                <input type="number" formControlName="balanceLBP" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Paid this month in USD</label>
+                            <div class="input-with-prefix paid-style">
+                                <span class="prefix">$</span>
+                                <input type="number" formControlName="paidThisMonthUSD" placeholder="0.00" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Paid this month in LBP</label>
+                            <div class="input-with-prefix paid-style">
+                                <span class="prefix">L.L</span>
+                                <input type="number" formControlName="paidThisMonthLBP" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>

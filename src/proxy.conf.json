@@ -1,0 +1,8 @@
+{
+  "/api/**": {
+    "target": "https://softclinicv2-api.softwavelb.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
